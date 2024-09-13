@@ -1,2 +1,1 @@
-# chrdsdatamanager
-Charybdis Monitoring System (DataManager)
+# Charybdis Monitoring System DataManager
