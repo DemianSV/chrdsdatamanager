@@ -16,8 +16,8 @@
 	},
 	"DB": {
 		"HOSTS": ["127.0.0.1:9042", "127.0.0.1:9043"],
-		"USERNAME": "cassandra",
-		"PASSWORD": "cassandra",
+		"USERNAME": "",
+		"PASSWORD": "",
 		"TLS": false,
 		"CERTPATH": "",
 		"KEYPATH": "",
