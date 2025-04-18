@@ -1,0 +1,42 @@
+services:
+  chrdsdatamanager:
+    image: chrdsdatamanager:latest
+    ports:
+      - 127.0.0.1:6006:6006
+      - 127.0.0.1:10051:10051
+    container_name: chrdsdatamanager
+    restart: always
+    environment:
+    - CHRDS_HTTP_HOST=0.0.0.0
+    - CHRDS_HTTP_PORT=6006
+    - CHRDS_HTTP_READTIMEOUT=10
+    - CHRDS_HTTP_WRITETIMEOUT=10
+    - CHRDS_HTTP_RL=100
+    - CHRDS_HTTP_TLS=false
+    - CHRDS_HTTP_CERTPATH=
+    - CHRDS_HTTP_KEYPATH=
+    - CHRDS_HTTP_CAPATH=
+    - CHRDS_WORKER_NUM=10
+    - CHRDS_WORKER_ACTIME=60
+    - CHRDS_DB_HOST=127.0.0.1:9042,127.0.0.1:9042
+    - CHRDS_DB_USERNAME=cassandra
+    - CHRDS_DB_PASSWORD=cassandra
+    - CHRDS_DB_TLS=false
+    - CHRDS_DB_CERTPATH=
+    - CHRDS_DB_KEYPATH=
+    - CHRDS_DB_CAPATH=
+    - CHRDS_DB_HOSTVERIFICATION=false
+    - CHRDS_DB_KEYSPACE=chrds
+    - CHRDS_DB_CONSISTENCY=Quorum
+    - CHRDS_DB_CONSISTENCYREAD=One
+    - CHRDS_DB_TIMEOUT=10000
+    - CHRDS_ZBX_HOST=0.0.0.0
+    - CHRDS_ZBX_PORT=10051
+    - CHRDS_ZBX_TYPE=tcp
+    - CHRDS_SWG_TITLE=Swagger Charibdis DataManager API
+    - CHRDS_SWG_DESCRIPTION=Monitoring system Charibdis DataManager
+    - CHRDS_SWG_VERSION=1.0
+    - CHRDS_SWG_HOST=monitor.services.ru:6443
+    - CHRDS_SWG_BASEPATH=/api/v1
+    - CHRDS_SWG_SCHEME=http
+

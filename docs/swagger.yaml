@@ -1,0 +1,310 @@
+definitions:
+  main.RequestRawDataGetT:
+    properties:
+      metric:
+        type: string
+      spaceid:
+        type: string
+    type: object
+  main.RequestRawDataSaveArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.RequestRawDataSaveT'
+        type: array
+    type: object
+  main.RequestRawDataSaveT:
+    properties:
+      eventtime:
+        type: integer
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      value:
+        type: number
+    type: object
+  main.RequestRawTextSaveArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.RequestRawTextSaveT'
+        type: array
+    type: object
+  main.RequestRawTextSaveT:
+    properties:
+      eventtime:
+        type: integer
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      value:
+        type: string
+    type: object
+  main.ResponseRawDataGetArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.ResponseRawDataGetT'
+        type: array
+    type: object
+  main.ResponseRawDataGetT:
+    properties:
+      createtime:
+        type: integer
+      eventtime:
+        type: integer
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      status:
+        type: integer
+      value:
+        type: number
+    type: object
+  main.ResponseRawDataSaveArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.ResponseRawDataSaveT'
+        type: array
+    type: object
+  main.ResponseRawDataSaveT:
+    properties:
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      status:
+        type: integer
+    type: object
+  main.ResponseRawTextGetArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.ResponseRawTextGetT'
+        type: array
+    type: object
+  main.ResponseRawTextGetT:
+    properties:
+      createtime:
+        type: integer
+      eventtime:
+        type: integer
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      status:
+        type: integer
+      value:
+        type: string
+    type: object
+  main.ResponseTaskGetArrayT:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.ResponseTaskGetT'
+        type: array
+    type: object
+  main.ResponseTaskGetT:
+    properties:
+      critical:
+        type: string
+      interval:
+        type: integer
+      metric:
+        type: string
+      object:
+        type: string
+      spaceid:
+        type: string
+      status:
+        type: integer
+      warning:
+        type: string
+    type: object
+  main.ResponseVersionT:
+    properties:
+      apiversion:
+        type: string
+      version:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /data/get:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Input structure
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.RequestRawDataGetT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ResponseRawDataGetArrayT'
+        "204":
+          description: NoContent
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Get operational monitoring data from the database
+      tags:
+      - Data
+  /data/save:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Input structure
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.RequestRawDataSaveArrayT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK, The status of 200 is always returned, the data is successfully
+            preserved if in the return structure status = 1
+          schema:
+            $ref: '#/definitions/main.ResponseRawDataSaveArrayT'
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Save monitoring data in the database
+      tags:
+      - Data
+  /task/get:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ResponseTaskGetArrayT'
+        "204":
+          description: NoContent
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Get a list of all your task to fulfill
+      tags:
+      - Task
+  /text/get:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Input structure
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.RequestRawDataGetT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ResponseRawTextGetArrayT'
+        "204":
+          description: NoContent
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Get text data from the database
+      tags:
+      - Data
+  /text/save:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Input structure
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.RequestRawTextSaveArrayT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK, The status of 200 is always returned, the data is successfully
+            preserved if in the return structure status = 1
+          schema:
+            $ref: '#/definitions/main.ResponseRawDataSaveArrayT'
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Save text monitoring data in the database
+      tags:
+      - Data
+  /version:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ResponseVersionT'
+        "403":
+          description: Forbidden, The monitoring module key is incorrect, or not registered
+        "500":
+          description: Internal server error, The internal error of the service
+      security:
+      - ApiKeyAuth: []
+      summary: Get the version of the DataManager module
+      tags:
+      - Version
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: api_key
+    type: apiKey
+swagger: "2.0"

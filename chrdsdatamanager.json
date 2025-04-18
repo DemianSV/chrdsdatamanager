@@ -1,0 +1,44 @@
+{
+	"HTTP": {
+		"HOST": "",
+		"PORT": "6006",
+		"READTIMEOUT": 10,
+		"WRITETIMEOUT": 10,
+		"RL": 100,
+		"TLS": false,
+		"CERTPATH": "",
+		"KEYPATH": "",
+		"CAPATH": ""
+	},
+	"WORKER": {
+		"POOL": 10,
+		"ACTIME": 60
+	},
+	"DB": {
+		"HOSTS": ["127.0.0.1:19042", "127.0.0.1:29042"],
+		"USERNAME": "cassandra",
+		"PASSWORD": "cassandra",
+		"TLS": false,
+		"CERTPATH": "",
+		"KEYPATH": "",
+		"CAPATH": "",
+		"HOSTVERIFICATION": false,
+		"KEYSPACE": "chrds",
+		"CONSISTENCY": "Quorum",
+		"CONSISTENCYREAD": "One",
+		"TIMEOUT": 10000
+	},
+	"ZBX": {
+		"HOST": "0.0.0.0",
+		"PORT": "10051",
+		"TYPE": "tcp"
+	},
+	"SWG": {
+		"TITLE": "Swagger Charibdis DataManager API",
+		"DESCRIPTION": "Monitoring system Charibdis DataManager",
+		"VERSION": "1.0",
+		"HOST": "monitor.services.ru:6443",
+		"BASEPATH": "/api/v1",
+		"SCHEME": "https"
+	}
+}
