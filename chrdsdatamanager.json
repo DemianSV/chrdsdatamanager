@@ -15,7 +15,7 @@
 		"ACTIME": 60
 	},
 	"DB": {
-		"HOSTS": ["127.0.0.1:19042", "127.0.0.1:29042"],
+		"HOSTS": ["127.0.0.1:9042", "127.0.0.1:9043"],
 		"USERNAME": "cassandra",
 		"PASSWORD": "cassandra",
 		"TLS": false,
@@ -37,8 +37,8 @@
 		"TITLE": "Swagger Charibdis DataManager API",
 		"DESCRIPTION": "Monitoring system Charibdis DataManager",
 		"VERSION": "1.0",
-		"HOST": "monitor.services.ru:6443",
+		"HOST": "127.0.0.1:6443",
 		"BASEPATH": "/api/v1",
-		"SCHEME": "https"
+		"SCHEME": "http"
 	}
 }
