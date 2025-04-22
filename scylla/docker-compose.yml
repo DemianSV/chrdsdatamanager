@@ -1,0 +1,46 @@
+services:
+  scylla01:
+    image: scylladb/scylla
+    ports:
+      - 127.0.0.1:9042:9042
+    volumes:
+      - scylla01:/var/lib/scylla
+      - ./scylla01.yaml:/etc/scylla/scylla.yaml
+      - ./cassandra01:/root/.cassandra
+      - ./createDB.cql:/root/createDB.cql
+    environment:
+      - SSL_VALIDATE=false
+    container_name: scylla01
+    command: --seeds=scylla01,scylla02 --smp 3 --memory 3G --authenticator=PasswordAuthenticator --reactor-backend=epoll
+    restart: always
+    networks:
+      scylla_net:
+        ipv4_address: 172.20.0.2
+
+  scylla02:
+    image: scylladb/scylla
+    ports:
+      - 127.0.0.1:9043:9042
+    volumes:
+      - scylla02:/var/lib/scylla
+      - ./scylla02.yaml:/etc/scylla/scylla.yaml
+      - ./cassandra02:/root/.cassandra
+    environment:
+      - SSL_VALIDATE=false
+    container_name: scylla02
+    command: --seeds=scylla01,scylla02 --smp 3 --memory 3G --authenticator=PasswordAuthenticator --reactor-backend=epoll
+    restart: always
+    networks:
+      scylla_net:
+        ipv4_address: 172.20.0.3
+volumes:
+  scylla01:
+  scylla02:
+networks:
+  scylla_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
